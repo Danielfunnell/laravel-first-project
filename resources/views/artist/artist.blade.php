@@ -8,4 +8,6 @@
     <a href="/artist/{{ $artist['ArtistId'] }}/album/{{ $album['AlbumId'] }}">{{ $album['Title'] }}</a>
 </li>
 
+
+    
 @endforeach

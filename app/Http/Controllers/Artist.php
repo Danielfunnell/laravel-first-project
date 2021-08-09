@@ -18,8 +18,9 @@ class Artist extends Controller
     
     public function view(){
         
-        $artists = \App\Models\Artist::all();
+        $artists = \App\Models\Artist::paginate(25);
         
+       
         return view('artist.view', [
             'artists' => $artists
         ]);
@@ -40,6 +41,7 @@ class Artist extends Controller
             $q->where('AlbumId', $albumId);
         }])->where('ArtistId', $id)->first();
         
+       
         return view('artist.album', [
             'artist' => $artist
         ]);

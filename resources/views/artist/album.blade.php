@@ -2,6 +2,8 @@
 
 <h2>{{ $artist->album['Title'] }}</h2>
 
+
+
 <table border="1">
     <thead>
         <tr>

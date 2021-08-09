@@ -12,3 +12,5 @@
 @endforeach
 
 </ul>
+
+{{ $artists->links() }}

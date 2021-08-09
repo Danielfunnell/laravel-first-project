@@ -11,10 +11,10 @@ class Customer extends Model
     
     protected $table = 'Customer';
     protected $primaryKey = 'CustomerId';
-
+    
     public function customerInvoices() {
         
         return $this->hasMany(Invoice::class, 'CustomerId');
     }
-    
 }
+

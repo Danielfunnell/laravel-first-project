@@ -20,18 +20,35 @@ class CustomerController extends Controller
 
         $customers = \App\Models\Customer::select('CustomerId', 'FirstName', 'LastName')
                                          ->orderBy('LastName', 'asc')
-                                         ->get();
+                                         ->paginate(15);
                     
-
+         $invoiceTotal = \App\Models\Invoice::groupBy('CustomerId')->orderBy('Total', 'DESC')->select([\DB::raw('SUM(Total) AS Total'), 'CustomerId'])->get();
+         
+         $topId = $invoiceTotal[0]->CustomerId;
+         
+         $topCustomer = \App\Models\Customer::select('CustomerId', 'FirstName', 'LastName')->where('CustomerId', $topId)->first();
+         
         return view('customer.index', [
-            'customers' => $customers
+            'customers' => $customers,
+            'topCustomer' => $topCustomer
         ]);
     }
 
     public function show($id) {
+        
+        
+        
+        $customer = \App\Models\Customer::with(['customerInvoices'])->where('CustomerId', $id)->first();
+         
+        $total = \App\Models\Invoice::select('Invoice.Total')->where('CustomerId', $id)->sum('Invoice.Total');
+         
+        $data = [
+            'customer' => $customer,
+            'total' => $total
+        ];
+            
 
-         $customerInv = \App\Models\Customer::with('customerInvoices')->where('CustomerId', $id);
-
-        return view('customer.show')->with('customerInv', $customerInv);
+        return view('customer.show')->with($data);
     }
+    
 }

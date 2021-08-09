@@ -11,11 +11,11 @@ class Invoice extends Model
 
     protected $table = 'Invoice';
 
-
+    protected $dates = ['InvoiceDate'];
     // A invoice belongs to a customer
     
     public function customer() {
 
-        return $this->hasOne(Customer::class, 'CustomerId');
+        return $this->belongsTo(Customer::class, 'CustomerId');
     }
 }

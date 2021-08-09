@@ -1,3 +1,5 @@
+<<h1>Top Customer: {{ $topCustomer->FirstName}} {{ $topCustomer->LastName }} </h1>
+
 <table border=1>
     <thread>
         <tr>
@@ -19,4 +21,7 @@
     </tbody>
 
 </table>
+
+{{ $customers->links() }}
+
 
