@@ -32,6 +32,13 @@
             <td>{{ $invoice->BillingState }}</td>
             <td>{{ $invoice->BillingPostalCode }}</td>
             <td>{{ $invoice->Total }}</td>
+            <td>
+                <form action="/customer/{{ $invoice->InvoiceId }}" method="POST">
+                @csrf
+                @method('DELETE')
+                    <Button>Delete</Button>
+                </form>
+            </td>
         </tr>
         @endforeach
     </tbody>
@@ -39,5 +46,18 @@
 
 
 <h3>Total spend: {{ $total }}</h3>
+
+<script>
+    // document.addEventListener("DOMContentLoaded", () => {
+    //     const rows = document.querySelectorAll("button[data-href]")
+
+    //     rows.forEach(row => {
+    //         row.addEventListener('click', () => {
+    //             window.location.href = row.dataset.href
+    //         })
+    //     })
+    // })
+
+</script>
 
 

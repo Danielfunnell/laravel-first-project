@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 Route::get('/customer', [App\Http\Controllers\CustomerController::class, 'index']);
 Route::get('/customer/show/{id}', [App\Http\Controllers\CustomerController::class, 'show']);
+Route::delete('/customer/{id}', [App\Http\Controllers\CustomerController::class, 'destroy']);
 
 Route::get('/artist', [App\Http\Controllers\Artist::class, 'view']);
 Route::get('/artist/{id}/album', [App\Http\Controllers\Artist::class, 'artists']);

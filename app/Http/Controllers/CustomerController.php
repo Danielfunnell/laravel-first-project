@@ -22,11 +22,11 @@ class CustomerController extends Controller
                                          ->orderBy('LastName', 'asc')
                                          ->paginate(15);
                     
-         $invoiceTotal = \App\Models\Invoice::groupBy('CustomerId')->orderBy('Total', 'DESC')->select([\DB::raw('SUM(Total) AS Total'), 'CustomerId'])->get();
+        $invoiceTotal = \App\Models\Invoice::groupBy('CustomerId')->orderBy('Total', 'DESC')->select([\DB::raw('SUM(Total) AS Total'), 'CustomerId'])->get();
          
          $topId = $invoiceTotal[0]->CustomerId;
          
-         $topCustomer = \App\Models\Customer::select('CustomerId', 'FirstName', 'LastName')->where('CustomerId', $topId)->first();
+        $topCustomer = \App\Models\Customer::select('CustomerId', 'FirstName', 'LastName')->where('CustomerId', $topId)->first();
          
         return view('customer.index', [
             'customers' => $customers,
@@ -49,6 +49,16 @@ class CustomerController extends Controller
             
 
         return view('customer.show')->with($data);
+    }
+
+    public function destroy($id) {
+        
+        $invoice = \App\Models\Invoice::select('InvoiceId')->where('InvoiceId', $id);
+
+
+        $invoice->delete();
+
+        return redirect('/');
     }
     
 }

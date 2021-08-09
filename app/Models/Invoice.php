@@ -10,6 +10,7 @@ class Invoice extends Model
     use HasFactory;
 
     protected $table = 'Invoice';
+    protected $primaryKey = 'invoiceId';
 
     protected $dates = ['InvoiceDate'];
     // A invoice belongs to a customer
